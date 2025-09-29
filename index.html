@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlockCraft 2025</title>
+  <style>
+    :root {
+      --bg: #f4f6fa;
+      --text: #111;
+      --card: rgba(255, 255, 255, 0.7);
+      --accent: #4a90e2;
+      --active: #4caf50;
+      --hover: rgba(255, 255, 255, 0.6);
+      --shadow: rgba(0, 0, 0, 0.1);
+      --toggle-bg: #4caf50;
+    }
+    [data-theme="dark"] {
+      --bg: #0d1117;
+      --text: #eaeaea;
+      --card: rgba(20, 20, 20, 0.7);
+      --accent: #64b5f6;
+      --active: #66bb6a;
+      --hover: rgba(255, 255, 255, 0.1);
+      --shadow: rgba(0, 0, 0, 0.6);
+      --toggle-bg: #4caf50;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.4s ease, color 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      width: 100%;
+      height: auto;
+      max-height: 500px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg);
+    }
+
+    header img {
+      width: 100%;
+      height: auto;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px var(--shadow);
+      padding: 0.8rem 1rem;
+      z-index: 10;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.5rem 1.2rem;
+      cursor: pointer;
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+
+    nav button:hover { background: var(--hover); }
+    nav button.active { background: var(--active); color: white; box-shadow: 0 4px 12px var(--shadow); }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem;
+    }
+
+    .content {
+      max-width: 900px;
+      width: 100%;
+      padding: 2rem;
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px var(--shadow);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .content h2 { margin-bottom: 1rem; }
+    .content p { line-height: 1.6; }
+
+    @keyframes fadeIn { from {opacity: 0; transform: translateY(10px);} to {opacity: 1; transform: translateY(0);} }
+
+    footer { position: fixed; bottom: 15px; left: 20px; font-size: 0.9rem; opacity: 0.8; }
+
+    .theme-toggle {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      background: var(--toggle-bg);
+      border: none;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 15px var(--shadow);
+      transition: transform 0.2s;
+      font-size: 1.1rem;
+    }
+    .theme-toggle:hover { transform: scale(1.05); }
+  </style>
+</head>
+<body data-theme="light">
+
+  <header>
+    <img src="BANNER-LINK-HERE" alt="Banner">
+  </header>
+
+  <nav>
+    <button class="tab-button active" data-tab="about">About</button>
+    <button class="tab-button" data-tab="faq">FAQ</button>
+    <button class="tab-button" data-tab="store">Store</button>
+  </nav>
+
+  <main>
+    <div class="content" id="about">
+      <h2>About</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl nec egestas varius, justo urna tincidunt neque, nec faucibus erat magna in sapien. </p>
+    </div>
+    <div class="content" id="faq" style="display:none;">
+      <h2>FAQ</h2>
+      <p>Here you will find answers to the most common questions. (Placeholder text)</p>
+    </div>
+  </main>
+
+  <button class="theme-toggle" id="themeToggle">🌙</button>
+
+  <footer>BlockCraft 2025</footer>
+
+  <script>
+    const buttons = document.querySelectorAll(".tab-button");
+    const contents = document.querySelectorAll(".content");
+    const themeToggle = document.getElementById("themeToggle");
+    const body = document.body;
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (btn.dataset.tab === "store") {
+          window.location.href = "https://example.com";
+          return;
+        }
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        contents.forEach(sec => {
+          sec.style.display = sec.id === btn.dataset.tab ? "block" : "none";
+        });
+      });
+    });
+
+    themeToggle.addEventListener("click", () => {
+      if (body.dataset.theme === "light") {
+        body.dataset.theme = "dark";
+        themeToggle.textContent = "☀️";
+      } else {
+        body.dataset.theme = "light";
+        themeToggle.textContent = "🌙";
+      }
+    });
+  </script>
+</body>
+</html>
